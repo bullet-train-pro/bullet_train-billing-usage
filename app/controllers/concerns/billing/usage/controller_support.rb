@@ -1,4 +1,4 @@
-module Billing::UsageControllerSupport
+module Billing::Usage::ControllerSupport
   extend ActiveSupport::Concern
 
   included do
