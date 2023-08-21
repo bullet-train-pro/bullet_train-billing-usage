@@ -8,7 +8,7 @@ class Billing::Usage::ProductCatalog
   end
 
   def current_products
-    products = parent.team.billing_subscriptions.active.map(&:included_prices).flatten.map(&:price).map(&:product)
+    products = non_zero_included_prices.map(&:price).compact.map(&:product).compact
     products.any? ? products : free_products
   end
 
@@ -29,4 +29,13 @@ class Billing::Usage::ProductCatalog
   protected
 
   attr_reader :parent
+
+  def non_zero_included_prices
+    parent
+      .team
+      .billing_subscriptions
+      .active
+      .flat_map(&:included_prices)
+      .select { |included_price| included_price.quantity && included_price.quantity > 0 }
+  end
 end
