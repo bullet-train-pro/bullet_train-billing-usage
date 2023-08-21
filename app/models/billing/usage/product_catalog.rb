@@ -36,6 +36,6 @@ class Billing::Usage::ProductCatalog
       .billing_subscriptions
       .active
       .flat_map(&:included_prices)
-      .select{ |included_price| included_price.quantity && included_price.quantity > 0 }
+      .select { |included_price| included_price.quantity && included_price.quantity > 0 }
   end
 end
