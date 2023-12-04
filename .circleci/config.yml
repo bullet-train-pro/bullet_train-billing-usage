@@ -196,7 +196,8 @@ workflows:
   version: 2
   build:
     jobs:
-      # - 'Local Minitest'
+      - 'Local Minitest':
+          context: knapsack-pro
       - 'Local Standard Ruby':
           context: knapsack-pro
       - 'Starter Repo Minitest':
